@@ -42,6 +42,11 @@ namespace Exercise_3
                 else
                     return false;
             }
+
+            public void traverse()
+            {
+                
+            }
         }
         
 
