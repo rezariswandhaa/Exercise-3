@@ -19,7 +19,7 @@ namespace Exercise_3
         class CircularList
         {
             Node LAST;
-            
+            Node START;
 
             public CircularList()
             {
