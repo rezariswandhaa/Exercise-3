@@ -16,14 +16,14 @@ namespace Exercise_3
             public Node next;
             public Node prev;
         }
+
         class CircularList
         {
             Node LAST;
             Node START;
-
             public CircularList()
             {
-                LAST = null;
+                START = null;
             }
             public void addNode()
             {
@@ -77,18 +77,14 @@ namespace Exercise_3
                 previous.next = newnode;
             }
 
-            public bool Search(int rollNO, ref Node previous, ref Node current)
+            public bool Search(int rollNo, ref Node previous, ref Node current)
             {
-                for (previous = current = LAST.next; current != LAST; previous = current, current = current.next)
-                {
-                    if (rollNO == current.rollNumber)
-                        return (true);
-                }
-                if (rollNO == LAST.rollNumber)
-                    return true;
-                else
-                    return (false);
+                for (previous = current =START; current != null &&
+                    rollNo != current.rollNumber; previous = current,
+                    current = current.next) { }
+                return (current != null);
             }
+
             public bool delNode(int rollNo)
             {
                 Node previous, current;
@@ -112,9 +108,10 @@ namespace Exercise_3
                 current.next.prev = previous;
                 return true;
             }
+
             public bool listEmpty()
             {
-                if (LAST == null)
+                if (START == null)
                     return true;
                 else
                     return false;
@@ -126,17 +123,15 @@ namespace Exercise_3
                     Console.WriteLine("\nList is empty");
                 else
                 {
-                    Console.WriteLine("\nRecords in the list are:\n");
+                    Console.WriteLine("\nRecords in the ascending order of " +
+                        "roll numbers are : \n");
                     Node currentNode;
-                    currentNode = LAST.next;
-                    while (currentNode != LAST)
-                    {
-                        Console.Write(currentNode.rollNumber +"   "+ currentNode.name + "\n");
-                        currentNode = currentNode.next;
-                    }
-                    Console.Write(LAST.rollNumber + "     "+ LAST.name + "\n");
+                    for (currentNode = START; currentNode != null;
+                        currentNode = currentNode.next)
+                        Console.Write(currentNode.rollNumber + " " + currentNode.name + "\n");
                 }
             }
+
             public void revtraverse()
             {
                 if (listEmpty())
@@ -156,14 +151,16 @@ namespace Exercise_3
                     }
 
                 }
+
             }
             public void firstNode()
             {
                 if (listEmpty())
-                    Console.WriteLine("\nList is empty");
+                    Console.WriteLine("\nList is Empty");
                 else
                     Console.WriteLine("\nThe first record in the list is:\n\n " + LAST.next.rollNumber + "   " + LAST.next.name);
             }
+
             static void Main(string[] args)
             {
                 CircularList obj = new CircularList();
@@ -173,11 +170,12 @@ namespace Exercise_3
                     {
                         Console.WriteLine("\n Menu" +
                             "\n 1. Add a record to the list" +
-                            "\n 2. Delete a record from the list" +
-                            "\n 3. View all records in the ascending order of roll numbers" +
-                            "\n 4. View all records in the descending order of roll numbers" +
-                            "\n 5. Search for a record in the list" +
-                            "\n 6. Exit \n" +
+                            "\n 2. Add a first Node to the list" +
+                            "\n 3. Delete a record from the list" +
+                            "\n 4. View all records in the ascending order of roll numbers" +
+                            "\n 5. View all records in the descending order of roll numbers" +
+                            "\n 6. Search for a record in the list" +
+                            "\n 7. Exit \n" +
                             "\n Enter your choice (1 - 6):");
                         char ch = Convert.ToChar(Console.ReadLine());
                         switch (ch)
@@ -188,6 +186,11 @@ namespace Exercise_3
                                 }
                                 break;
                             case '2':
+                                {
+                                    obj.firstNode();
+                                }
+                                break;
+                            case '3':
                                 {
                                     if (obj.listEmpty())
                                     {
@@ -205,17 +208,17 @@ namespace Exercise_3
 
                                 }
                                 break;
-                            case '3':
+                            case '4':
                                 {
                                     obj.traverse();
                                 }
                                 break;
-                            case '4':
+                            case '5':
                                 {
                                     obj.revtraverse();
                                 }
                                 break;
-                            case '5':
+                            case '6':
                                 {
                                     if (obj.listEmpty() == true)
                                     {
@@ -236,7 +239,7 @@ namespace Exercise_3
                                     }
                                 }
                                 break;
-                            case '6':
+                            case '7':
                                 return;
                             default:
                                 {
@@ -247,7 +250,7 @@ namespace Exercise_3
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine(e.ToString());
+                        Console.WriteLine("Check for the values entered.");
                     }
                 }
 
