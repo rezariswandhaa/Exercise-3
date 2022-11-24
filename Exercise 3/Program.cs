@@ -65,7 +65,26 @@ namespace Exercise_3
                     Console.Write(LAST.rollNumber + "     "+ LAST.name + "\n");
                 }
             }
-            
+            public void revtraverse()
+            {
+                if (listEmpty())
+                    Console.WriteLine("\nList is Empty");
+                else
+                {
+                    Console.WriteLine("\nRecords in the descending order of " +
+                        "roll numbers are : \n");
+                    Node currentNode;
+                    for (currentNode = START; currentNode.next != null;
+                        currentNode = currentNode.next) { }
+                    while (currentNode != null)
+                    {
+                        Console.Write(currentNode.rollNumber + " " +
+                            currentNode.name + "\n");
+                        currentNode = currentNode.prev;
+                    }
+
+                }
+            }
             public void firstNode()
             {
                 if (listEmpty())
