@@ -23,7 +23,18 @@ namespace Exercise_3
                 LAST = null;
             }
 
-            
+            public bool Search(int rollNO, ref Node previous, ref Node current)
+            {
+                for(previous = current = LAST.next; current != LAST; previous = current, current = current.next)
+                {
+                    if(rollNO == current.rollNumber)
+                        return (true);
+                }
+                if (rollNO == LAST.rollNumber)
+                    return true;
+                else
+                    return (false);
+            }
         }
 
 
